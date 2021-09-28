@@ -2,6 +2,7 @@
  [{description, "∅HR platform"},
   {vsn, "0.1.0"},
   {registered, []},
+  {mod, {zhr@application, []}},
   {applications,
    [kernel,
     stdlib,

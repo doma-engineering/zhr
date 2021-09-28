@@ -14,7 +14,8 @@ pub fn my_service(_req: Request(BitString)) -> Response(BitBuilder) {
 
 // Start it on port 3000!
 //
-pub fn start() {
+// One unused argument is to match arity of `worker`.
+pub fn start(_) {
   cowboy.start(my_service, on_port: 3000)
 }
 
