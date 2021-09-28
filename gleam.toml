@@ -1,3 +1,3 @@
 name = "zhr"
 
-# repository = { type = "github", user = "my-user", repo = "zhr" }
+repository = { type = "github", user = "doma-engineering", repo = "zhr" }
