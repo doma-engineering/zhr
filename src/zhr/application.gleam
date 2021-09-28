@@ -1,7 +1,6 @@
-import gleam/otp/supervisor.{ApplicationStartMode, add, worker}
+import gleam/otp/supervisor.{add, worker}
 import gleam/list
 import gleam/otp/process
-import gleam/dynamic.{Dynamic}
 import gleam/result
 import zhr
 
