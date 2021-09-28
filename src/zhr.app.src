@@ -5,6 +5,7 @@
   {applications,
    [kernel,
     stdlib,
+    gleam_cowboy,
     gleam_stdlib
    ]},
   {env,[]},
