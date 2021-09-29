@@ -1,18 +1,13 @@
-import gleam/otp/supervisor.{add, worker}
 import gleam/list
 import gleam/otp/process
+import gleam/otp/supervisor
 import gleam/result
 import zhr
+import utils/otp.{Worker, init_tagged}
 
 fn init(children) {
-  [zhr.start]
-  |> list.fold(
-    children,
-    fn(acc, x) {
-      acc
-      |> add(worker(x))
-    },
-  )
+  [Worker(zhr.start)]
+  |> init_tagged(children)
 }
 
 pub fn start(_, _) {
