@@ -1,15 +1,23 @@
 import gleam/otp/process
+import gleam/otp/actor
 import gleam/otp/supervisor
 import gleam/result
 import gleam/io
-import utils/otp.{Worker, init_tagged}
 import utils/wrk_demo
 import utils/wrk_demo.{Tick}
+import gleam/list
+import gleam/otp/supervisor.{add, worker}
 
 fn init(children) {
   io.println("Initialising a demo supervisor")
-  [Worker(wrk_demo.start)]
-  |> init_tagged(children)
+  [wrk_demo.start]
+  |> list.fold(
+    children,
+    fn(acc, x) {
+      acc
+      |> add(worker(x))
+    },
+  )
 }
 
 pub fn start1(_) {
@@ -19,7 +27,7 @@ pub fn start1(_) {
 pub fn start(_, _) {
   assert Ok(snd) = supervisor.start(init)
   snd
-  |> process.send(Tick)
+  |> actor.send(Tick)
   Ok(snd)
 }
 

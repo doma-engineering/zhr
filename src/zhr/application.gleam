@@ -3,12 +3,27 @@ import gleam/otp/process
 import gleam/otp/supervisor
 import gleam/result
 import zhr
-import utils/otp.{Supervisor, Worker, init_tagged}
+import gleam/otp/supervisor.{add, supervisor, worker}
 import utils/sup_demo
 
 fn init(children) {
-  [Worker(zhr.start), Supervisor(sup_demo.start1)]
-  |> init_tagged(children)
+  let children1 =
+    [zhr.start]
+    |> list.fold(
+      children,
+      fn(acc, x) {
+        acc
+        |> add(worker(x))
+      },
+    )
+  [sup_demo.start1]
+  |> list.fold(
+    children1,
+    fn(acc, x) {
+      acc
+      |> add(supervisor(x))
+    },
+  )
 }
 
 pub fn start(_, _) {
