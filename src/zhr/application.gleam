@@ -3,10 +3,11 @@ import gleam/otp/process
 import gleam/otp/supervisor
 import gleam/result
 import zhr
-import utils/otp.{Worker, init_tagged}
+import utils/otp.{Supervisor, Worker, init_tagged}
+import utils/sup_demo
 
 fn init(children) {
-  [Worker(zhr.start)]
+  [Worker(zhr.start), Supervisor(sup_demo.start1)]
   |> init_tagged(children)
 }
 
